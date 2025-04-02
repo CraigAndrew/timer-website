@@ -1,1 +1,1 @@
-eval "$(ssh-agent -s)" && ssh-add --apple-use-keychain ~/.ssh/CraigCosoft && git clone git@github.com:CraigAndrew/timer-website.git
+eval "$(ssh-agent -s)" && ssh-add --apple-use-keychain ~/.ssh/CraigCosoft && git add . && git commit -am "commit msg" && git push
