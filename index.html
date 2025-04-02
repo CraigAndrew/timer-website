@@ -60,7 +60,56 @@
             width: 500px;
             text-align: center;
             color: #4a6cf7;
+            position: relative;
         }
+        
+        .timer-display input {
+            font-size: 80px;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            color: #4a6cf7;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-family: inherit;
+        }
+        
+        /* Time unit control styles */
+        .timer-with-controls {
+            position: relative;
+            width: 500px;
+            margin: 0 auto;
+        }
+        
+        .unit-arrow {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #4a6cf7;
+            cursor: pointer;
+            padding: 5px;
+            opacity: 0.7;
+            transition: all 0.2s ease;
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Position bottom arrows closer to the numbers */
+        .hours-down, .minutes-down, .seconds-down {
+            bottom: 20px;
+        }
+        
+        .unit-arrow:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        
+        /* Removing static positioning - now handled by JavaScript */
         
         .timer-controls {
             display: flex;
@@ -232,7 +281,22 @@
         <!-- Main Timer Section -->
         <div class="timer-container">
             <!-- Timer Display -->
-            <div class="timer-display">00:00:00</div>
+            <div class="timer-with-controls">
+                <div class="timer-display">
+                    <!-- Timer input -->
+                    <input type="text" id="timer-input" value="00:00:00" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}" maxlength="8">
+                </div>
+                
+                <!-- Up arrows -->
+                <button class="unit-arrow hours-up">▲</button>
+                <button class="unit-arrow minutes-up">▲</button>
+                <button class="unit-arrow seconds-up">▲</button>
+                
+                <!-- Down arrows -->
+                <button class="unit-arrow hours-down">▼</button>
+                <button class="unit-arrow minutes-down">▼</button>
+                <button class="unit-arrow seconds-down">▼</button>
+            </div>
             
             <!-- Timer Controls -->
             <div class="timer-controls">
@@ -343,10 +407,43 @@
         // Basic timer functionality
         let timerInterval;
         let seconds = 0;
-        const timerDisplay = document.querySelector('.timer-display');
+        const timerInput = document.getElementById('timer-input');
         const startButton = document.querySelector('.start');
         const pauseButton = document.querySelector('.pause');
         const resetButton = document.querySelector('.reset');
+        const timerTypeSelect = document.getElementById('timer-type');
+        
+        // Arrow control buttons
+        const hoursUpButton = document.querySelector('.hours-up');
+        const hoursDownButton = document.querySelector('.hours-down');
+        const minutesUpButton = document.querySelector('.minutes-up');
+        const minutesDownButton = document.querySelector('.minutes-down');
+        const secondsUpButton = document.querySelector('.seconds-up');
+        const secondsDownButton = document.querySelector('.seconds-down');
+        
+        // Position arrows optimally
+        function positionArrows() {
+            // For hour arrows
+            hoursUpButton.style.top = '5px';
+            hoursUpButton.style.left = '150px';
+            hoursDownButton.style.left = '150px';
+            // Bottom positioning now handled by CSS
+            
+            // For minute arrows
+            minutesUpButton.style.top = '5px';
+            minutesUpButton.style.left = '280px';
+            minutesDownButton.style.left = '280px';
+            // Bottom positioning now handled by CSS
+            
+            // For second arrows
+            secondsUpButton.style.top = '5px';
+            secondsUpButton.style.left = '415px';
+            secondsDownButton.style.left = '415px';
+            // Bottom positioning now handled by CSS
+        }
+        
+        // Position arrows when page loads
+        window.addEventListener('DOMContentLoaded', positionArrows);
         
         function formatTime(totalSeconds) {
             const hours = Math.floor(totalSeconds / 3600);
@@ -356,11 +453,124 @@
             return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
         
+        function parseTimeToSeconds(timeString) {
+            const [hours, minutes, secs] = timeString.split(':').map(num => parseInt(num, 10));
+            return (hours * 3600) + (minutes * 60) + secs;
+        }
+        
+        function updateTime() {
+            let [hours, minutes, secs] = timerInput.value.split(':').map(num => parseInt(num, 10));
+            seconds = (hours * 3600) + (minutes * 60) + secs;
+            timerInput.value = formatTime(seconds);
+        }
+        
+        // Add event listeners for arrow controls
+        hoursUpButton.addEventListener('click', () => {
+            let [hours, minutes, secs] = timerInput.value.split(':').map(num => parseInt(num, 10));
+            hours = (hours + 1) % 100; // Cap at 99 hours
+            timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            updateTime();
+        });
+        
+        hoursDownButton.addEventListener('click', () => {
+            let [hours, minutes, secs] = timerInput.value.split(':').map(num => parseInt(num, 10));
+            hours = hours > 0 ? hours - 1 : 99; // Wrap around to 99
+            timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            updateTime();
+        });
+        
+        minutesUpButton.addEventListener('click', () => {
+            let [hours, minutes, secs] = timerInput.value.split(':').map(num => parseInt(num, 10));
+            minutes = (minutes + 1) % 60; // Cap at 59 minutes
+            timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            updateTime();
+        });
+        
+        minutesDownButton.addEventListener('click', () => {
+            let [hours, minutes, secs] = timerInput.value.split(':').map(num => parseInt(num, 10));
+            minutes = minutes > 0 ? minutes - 1 : 59; // Wrap around to 59
+            timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            updateTime();
+        });
+        
+        secondsUpButton.addEventListener('click', () => {
+            let [hours, minutes, secs] = timerInput.value.split(':').map(num => parseInt(num, 10));
+            secs = (secs + 1) % 60; // Cap at 59 seconds
+            timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            updateTime();
+        });
+        
+        secondsDownButton.addEventListener('click', () => {
+            let [hours, minutes, secs] = timerInput.value.split(':').map(num => parseInt(num, 10));
+            secs = secs > 0 ? secs - 1 : 59; // Wrap around to 59
+            timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            updateTime();
+        });
+        
+        // Add event listener to parse the input when it loses focus
+        timerInput.addEventListener('blur', () => {
+            const inputValue = timerInput.value;
+            // Validate the input format using regex
+            const isValid = /^[0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(inputValue);
+            
+            if (isValid) {
+                seconds = parseTimeToSeconds(inputValue);
+            } else {
+                // Reset to valid format if invalid input
+                timerInput.value = formatTime(seconds);
+            }
+        });
+        
+        // Handle key presses to validate input as user types
+        timerInput.addEventListener('keypress', (e) => {
+            // Allow only numbers and colons
+            const char = String.fromCharCode(e.which);
+            const currentValue = timerInput.value;
+            
+            // Only allow digits and colons in the correct positions
+            if (!/[\d:]/.test(char) || 
+                (char === ':' && currentValue.length !== 2 && currentValue.length !== 5) ||
+                (currentValue.length === 2 && char !== ':' && e.key !== 'Tab') ||
+                (currentValue.length === 5 && char !== ':' && e.key !== 'Tab')) {
+                e.preventDefault();
+            }
+            
+            // Auto-add colons after hours and minutes
+            if (currentValue.length === 2 && char !== ':' && e.key !== 'Tab') {
+                timerInput.value += ':';
+            } else if (currentValue.length === 5 && char !== ':' && e.key !== 'Tab') {
+                timerInput.value += ':';
+            }
+        });
+        
         startButton.addEventListener('click', () => {
+            // Parse the current input value
+            seconds = parseTimeToSeconds(timerInput.value);
+            
+            // Check if we have time to count down (for countdown mode)
+            if (timerTypeSelect.value === 'countdown' && seconds === 0) {
+                // Set a default countdown time if the timer is at 0
+                seconds = 60; // Default to 1 minute
+                timerInput.value = formatTime(seconds);
+            }
+            
             clearInterval(timerInterval);
             timerInterval = setInterval(() => {
-                seconds++;
-                timerDisplay.textContent = formatTime(seconds);
+                if (timerTypeSelect.value === 'countdown') {
+                    // Count down
+                    seconds--;
+                    
+                    // Stop at zero
+                    if (seconds <= 0) {
+                        seconds = 0;
+                        clearInterval(timerInterval);
+                        // Could add an alarm sound here
+                    }
+                } else {
+                    // Count up for other timer types
+                    seconds++;
+                }
+                timerInput.value = formatTime(seconds);
             }, 1000);
         });
         
@@ -371,7 +581,7 @@
         resetButton.addEventListener('click', () => {
             clearInterval(timerInterval);
             seconds = 0;
-            timerDisplay.textContent = formatTime(seconds);
+            timerInput.value = formatTime(seconds);
         });
         
         // Theme switching
