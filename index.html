@@ -46,7 +46,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 40px 0;
+            margin: 40px auto;
+            width: 100%;
+            max-width: 800px;
         }
         
         .timer-display {
@@ -61,6 +63,8 @@
             text-align: center;
             color: #4a6cf7;
             position: relative;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .timer-display input {
@@ -80,6 +84,8 @@
             position: relative;
             width: 500px;
             margin: 0 auto;
+            display: flex;
+            justify-content: center;
         }
         
         .unit-arrow {
@@ -115,6 +121,8 @@
             display: flex;
             gap: 15px;
             margin-bottom: 30px;
+            justify-content: center;
+            width: 100%;
         }
         
         .timer-button {
@@ -141,40 +149,58 @@
             color: white;
         }
         
-        .timer-button:hover {
+        .disabled-button {
+            opacity: 0.5;
+            cursor: default;
+        }
+        
+        .timer-button:not(.disabled-button):hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
         
         .timer-settings {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 20px;
-            justify-content: center;
+            justify-content: space-evenly;
             background-color: #fff;
-            padding: 20px;
+            padding: 20px 30px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             margin-bottom: 30px;
-            width: 80%;
+            width: 90%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            overflow-x: auto;
         }
         
         .setting-group {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
+            min-width: 150px;
+            flex: 1;
         }
         
         .setting-group label {
             margin-bottom: 5px;
             font-weight: 500;
+            text-align: center;
         }
         
         .setting-group select, .setting-group input {
             padding: 8px 12px;
             border-radius: 5px;
             border: 1px solid #ddd;
-            width: 200px;
+            width: 150px;
+        }
+        
+        /* Custom styles for the volume slider */
+        .volume-slider input[type="range"] {
+            width: 120px;
+            padding: 8px 0;
         }
         
         .features-grid {
@@ -328,7 +354,7 @@
                     </select>
                 </div>
                 
-                <div class="setting-group">
+                <div class="setting-group volume-slider">
                     <label for="volume">Volume</label>
                     <input type="range" id="volume" min="0" max="100" value="80">
                 </div>
@@ -407,6 +433,7 @@
         // Basic timer functionality
         let timerInterval;
         let seconds = 0;
+        let isRunning = false;
         const timerInput = document.getElementById('timer-input');
         const startButton = document.querySelector('.start');
         const pauseButton = document.querySelector('.pause');
@@ -423,27 +450,31 @@
         
         // Position arrows optimally
         function positionArrows() {
-            // For hour arrows
+            const timerWidth = document.querySelector('.timer-display').offsetWidth;
+            const totalWidth = timerWidth + 100; // Include padding
+            
+            // For hour arrows - positioned at ~1/6 of the display width
+            const hourPos = totalWidth * 0.21;
             hoursUpButton.style.top = '5px';
-            hoursUpButton.style.left = '150px';
-            hoursDownButton.style.left = '150px';
-            // Bottom positioning now handled by CSS
+            hoursUpButton.style.left = `${hourPos}px`;
+            hoursDownButton.style.left = `${hourPos}px`;
             
-            // For minute arrows
+            // For minute arrows - positioned at ~1/2 of the display width
+            const minutePos = totalWidth * 0.43;
             minutesUpButton.style.top = '5px';
-            minutesUpButton.style.left = '280px';
-            minutesDownButton.style.left = '280px';
-            // Bottom positioning now handled by CSS
+            minutesUpButton.style.left = `${minutePos}px`;
+            minutesDownButton.style.left = `${minutePos}px`;
             
-            // For second arrows
+            // For second arrows - positioned at ~5/6 of the display width
+            const secondPos = totalWidth * 0.65;
             secondsUpButton.style.top = '5px';
-            secondsUpButton.style.left = '415px';
-            secondsDownButton.style.left = '415px';
-            // Bottom positioning now handled by CSS
+            secondsUpButton.style.left = `${secondPos}px`;
+            secondsDownButton.style.left = `${secondPos}px`;
         }
         
-        // Position arrows when page loads
+        // Position arrows when page loads and on window resize
         window.addEventListener('DOMContentLoaded', positionArrows);
+        window.addEventListener('resize', positionArrows);
         
         function formatTime(totalSeconds) {
             const hours = Math.floor(totalSeconds / 3600);
@@ -464,12 +495,46 @@
             timerInput.value = formatTime(seconds);
         }
         
+        // Function to update button states
+        function updateButtonStates() {
+            // Reset button should be dimmed when timer is at 0
+            if (seconds === 0) {
+                resetButton.classList.add('disabled-button');
+                
+                // Also dim Start button when in countdown mode and timer is at 0
+                if (timerTypeSelect.value === 'countdown') {
+                    startButton.classList.add('disabled-button');
+                } else {
+                    startButton.classList.remove('disabled-button');
+                }
+            } else {
+                resetButton.classList.remove('disabled-button');
+                
+                // For non-zero times, Start button state depends only on isRunning
+                if (!isRunning) {
+                    startButton.classList.remove('disabled-button');
+                }
+            }
+            
+            // Pause button should be dimmed when timer is not running
+            if (!isRunning) {
+                pauseButton.classList.add('disabled-button');
+            } else {
+                pauseButton.classList.remove('disabled-button');
+                startButton.classList.add('disabled-button');
+            }
+        }
+        
+        // Initial button states
+        updateButtonStates();
+        
         // Add event listeners for arrow controls
         hoursUpButton.addEventListener('click', () => {
             let [hours, minutes, secs] = timerInput.value.split(':').map(num => parseInt(num, 10));
             hours = (hours + 1) % 100; // Cap at 99 hours
             timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
             updateTime();
+            updateButtonStates();
         });
         
         hoursDownButton.addEventListener('click', () => {
@@ -477,6 +542,7 @@
             hours = hours > 0 ? hours - 1 : 99; // Wrap around to 99
             timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
             updateTime();
+            updateButtonStates();
         });
         
         minutesUpButton.addEventListener('click', () => {
@@ -484,6 +550,7 @@
             minutes = (minutes + 1) % 60; // Cap at 59 minutes
             timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
             updateTime();
+            updateButtonStates();
         });
         
         minutesDownButton.addEventListener('click', () => {
@@ -491,6 +558,7 @@
             minutes = minutes > 0 ? minutes - 1 : 59; // Wrap around to 59
             timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
             updateTime();
+            updateButtonStates();
         });
         
         secondsUpButton.addEventListener('click', () => {
@@ -498,6 +566,7 @@
             secs = (secs + 1) % 60; // Cap at 59 seconds
             timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
             updateTime();
+            updateButtonStates();
         });
         
         secondsDownButton.addEventListener('click', () => {
@@ -505,6 +574,7 @@
             secs = secs > 0 ? secs - 1 : 59; // Wrap around to 59
             timerInput.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
             updateTime();
+            updateButtonStates();
         });
         
         // Add event listener to parse the input when it loses focus
@@ -519,6 +589,7 @@
                 // Reset to valid format if invalid input
                 timerInput.value = formatTime(seconds);
             }
+            updateButtonStates();
         });
         
         // Handle key presses to validate input as user types
@@ -544,6 +615,8 @@
         });
         
         startButton.addEventListener('click', () => {
+            if (startButton.classList.contains('disabled-button')) return;
+            
             // Parse the current input value
             seconds = parseTimeToSeconds(timerInput.value);
             
@@ -555,6 +628,7 @@
             }
             
             clearInterval(timerInterval);
+            isRunning = true;
             timerInterval = setInterval(() => {
                 if (timerTypeSelect.value === 'countdown') {
                     // Count down
@@ -564,6 +638,7 @@
                     if (seconds <= 0) {
                         seconds = 0;
                         clearInterval(timerInterval);
+                        isRunning = false;
                         // Could add an alarm sound here
                     }
                 } else {
@@ -571,17 +646,28 @@
                     seconds++;
                 }
                 timerInput.value = formatTime(seconds);
+                updateButtonStates();
             }, 1000);
+            
+            updateButtonStates();
         });
         
         pauseButton.addEventListener('click', () => {
+            if (pauseButton.classList.contains('disabled-button')) return;
+            
             clearInterval(timerInterval);
+            isRunning = false;
+            updateButtonStates();
         });
         
         resetButton.addEventListener('click', () => {
+            if (resetButton.classList.contains('disabled-button')) return;
+            
             clearInterval(timerInterval);
             seconds = 0;
+            isRunning = false;
             timerInput.value = formatTime(seconds);
+            updateButtonStates();
         });
         
         // Theme switching
@@ -608,6 +694,9 @@
                     document.body.style.color = '#333';
             }
         });
+        
+        // Check for timer type changes to update button states
+        timerTypeSelect.addEventListener('change', updateButtonStates);
     </script>
 </body>
 </html>
