@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TimeMaster Pro - The Ultimate Online Timer</title>
+    <title>Easy Count</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -441,6 +441,7 @@
         const pauseButton = document.querySelector('.pause');
         const resetButton = document.querySelector('.reset');
         const timerTypeSelect = document.getElementById('timer-type');
+        const originalTitle = document.title;
         
         // Arrow control buttons
         const hoursUpButton = document.querySelector('.hours-up');
@@ -484,6 +485,35 @@
             const seconds = totalSeconds % 60;
             
             return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        function updateDocumentTitle(time) {
+            const timerType = timerTypeSelect.value;
+            
+            if (time === '00:00:00' && timerType === 'countdown') {
+                document.title = 'Time is up! - Easy Count';
+            } else {
+                // Parse time components
+                const [hoursStr, minutesStr, secondsStr] = time.split(':');
+                const hours = parseInt(hoursStr, 10);
+                const minutes = parseInt(minutesStr, 10);
+                const seconds = parseInt(secondsStr, 10);
+                
+                // Build simplified time string
+                let simplifiedTime = '';
+                
+                if (hours > 0) {
+                    simplifiedTime += `${hours}h `;
+                }
+                
+                if (hours > 0 || minutes > 0) {
+                    simplifiedTime += `${minutes}m `;
+                }
+                
+                simplifiedTime += `${seconds}s`;
+                
+                document.title = `${simplifiedTime} - Easy Count`;
+            }
         }
         
         function parseTimeToSeconds(timeString) {
@@ -641,6 +671,8 @@
                         seconds = 0;
                         clearInterval(timerInterval);
                         isRunning = false;
+                        // Update title to "Time is up!"
+                        updateDocumentTitle('00:00:00');
                         // Could add an alarm sound here
                     }
                 } else {
@@ -648,6 +680,8 @@
                     seconds++;
                 }
                 timerInput.value = formatTime(seconds);
+                // Update the document title with current time
+                updateDocumentTitle(formatTime(seconds));
                 updateButtonStates();
             }, 1000);
             
@@ -669,6 +703,8 @@
             seconds = 0;
             isRunning = false;
             timerInput.value = formatTime(seconds);
+            // Reset the document title back to original
+            document.title = originalTitle;
             updateButtonStates();
         });
         
