@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeMaster Pro - The Ultimate Online Timer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a6cf7;
+        }
+        
+        .ad-banner {
+            background-color: #f0f0f0;
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 4px;
+            border: 1px dashed #ccc;
+        }
+        
+        .timer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px 0;
+        }
+        
+        .timer-display {
+            font-size: 80px;
+            font-weight: bold;
+            background-color: #fff;
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            width: 500px;
+            text-align: center;
+            color: #4a6cf7;
+        }
+        
+        .timer-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .timer-button {
+            padding: 12px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .start {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .pause {
+            background-color: #FFC107;
+            color: #333;
+        }
+        
+        .reset {
+            background-color: #F44336;
+            color: white;
+        }
+        
+        .timer-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .timer-settings {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            width: 80%;
+        }
+        
+        .setting-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .setting-group label {
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .setting-group select, .setting-group input {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 200px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card h3 {
+            color: #4a6cf7;
+            margin-top: 0;
+        }
+        
+        footer {
+            background-color: #f0f2f5;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 1px solid #eee;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: #4a6cf7;
+        }
+        
+        @media (max-width: 768px) {
+            .timer-display {
+                font-size: 60px;
+                width: 90%;
+                padding: 20px;
+            }
+            
+            .timer-settings {
+                width: 95%;
+            }
+        }
+        
+        /* Ad spaces styling */
+        .ad-sidebar {
+            position: fixed;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            width: 160px;
+            height: 600px;
+            background-color: #f0f0f0;
+            border: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        
+        .ad-content {
+            text-align: center;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Logo and Navigation -->
+    <header>
+        <div class="container">
+            <div class="logo">TimeMaster Pro</div>
+        </div>
+    </header>
+    
+    <!-- Top Banner Ad Space -->
+    <div class="container">
+        <div class="ad-banner">
+            <div class="ad-content">Top Banner Ad Space (728×90)</div>
+        </div>
+        
+        <!-- Main Timer Section -->
+        <div class="timer-container">
+            <!-- Timer Display -->
+            <div class="timer-display">00:00:00</div>
+            
+            <!-- Timer Controls -->
+            <div class="timer-controls">
+                <button class="timer-button start">Start</button>
+                <button class="timer-button pause">Pause</button>
+                <button class="timer-button reset">Reset</button>
+            </div>
+            
+            <!-- Timer Settings -->
+            <div class="timer-settings">
+                <div class="setting-group">
+                    <label for="timer-type">Timer Type</label>
+                    <select id="timer-type">
+                        <option value="countdown">Countdown</option>
+                        <option value="stopwatch">Stopwatch</option>
+                        <option value="interval">Interval Timer</option>
+                        <option value="pomodoro">Pomodoro Timer</option>
+                    </select>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="sound">Alert Sound</label>
+                    <select id="sound">
+                        <option value="beep">Beep</option>
+                        <option value="bell">Bell</option>
+                        <option value="chirp">Chirp</option>
+                        <option value="alarm">Alarm</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="volume">Volume</label>
+                    <input type="range" id="volume" min="0" max="100" value="80">
+                </div>
+                
+                <div class="setting-group">
+                    <label for="theme">Theme</label>
+                    <select id="theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="blue">Blue</option>
+                        <option value="green">Green</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features Grid Section -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Multiple Timer Types</h3>
+                <p>Choose from countdown, stopwatch, interval timer, or pomodoro technique timer to match your specific needs.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Customizable Alerts</h3>
+                <p>Select from a variety of alert sounds or upload your own custom sound to notify you when your timer ends.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Visual Themes</h3>
+                <p>Personalize your timer with different color themes to match your preferences or reduce eye strain.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Save & Share</h3>
+                <p>Save your favorite timer configurations and share them with friends or colleagues via a unique URL.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Full Screen Mode</h3>
+                <p>Expand your timer to full screen for maximum visibility during presentations or workouts.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Mobile Friendly</h3>
+                <p>Access your timer from any device with a responsive design that works on desktops, tablets, and smartphones.</p>
+            </div>
+        </div>
+        
+        <!-- Bottom Banner Ad Space -->
+        <div class="ad-banner">
+            <div class="ad-content">Bottom Banner Ad Space (728×90)</div>
+        </div>
+    </div>
+    
+    <!-- Sidebar Ad Space -->
+    <div class="ad-sidebar">
+        <div class="ad-content">Sidebar Ad Space (160×600)</div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">© 2025 TimeMaster Pro. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Basic timer functionality
+        let timerInterval;
+        let seconds = 0;
+        const timerDisplay = document.querySelector('.timer-display');
+        const startButton = document.querySelector('.start');
+        const pauseButton = document.querySelector('.pause');
+        const resetButton = document.querySelector('.reset');
+        
+        function formatTime(totalSeconds) {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        startButton.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                seconds++;
+                timerDisplay.textContent = formatTime(seconds);
+            }, 1000);
+        });
+        
+        pauseButton.addEventListener('click', () => {
+            clearInterval(timerInterval);
+        });
+        
+        resetButton.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            seconds = 0;
+            timerDisplay.textContent = formatTime(seconds);
+        });
+        
+        // Theme switching
+        const themeSelector = document.getElementById('theme');
+        themeSelector.addEventListener('change', () => {
+            const theme = themeSelector.value;
+            const root = document.documentElement;
+            
+            switch(theme) {
+                case 'dark':
+                    document.body.style.backgroundColor = '#222';
+                    document.body.style.color = '#fff';
+                    break;
+                case 'blue':
+                    document.body.style.backgroundColor = '#e6f7ff';
+                    document.body.style.color = '#333';
+                    break;
+                case 'green':
+                    document.body.style.backgroundColor = '#e6ffee';
+                    document.body.style.color = '#333';
+                    break;
+                default: // light
+                    document.body.style.backgroundColor = '#f8f9fa';
+                    document.body.style.color = '#333';
+            }
+        });
+    </script>
+</body>
+</html>
