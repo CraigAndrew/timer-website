@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="90" fill="#4285F4" />
+  
+  <!-- Inner circle (lighter blue) -->
+  <circle cx="100" cy="100" r="75" fill="#5C9EF7" />
+  
+  <!-- Counter display background -->
+  <rect x="50" y="70" width="100" height="60" rx="10" ry="10" fill="#FFFFFF" />
+  
+  <!-- Counter numbers -->
+  <text x="100" y="110" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#333333">123</text>
+  
+  <!-- Plus button -->
+  <circle cx="140" cy="140" r="20" fill="#34A853" />
+  <line x1="140" y1="130" x2="140" y2="150" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+  <line x1="130" y1="140" x2="150" y2="140" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+  
+  <!-- Minus button -->
+  <circle cx="60" cy="140" r="20" fill="#EA4335" />
+  <line x1="50" y1="140" x2="70" y2="140" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+  
+  <!-- "EC" initials for Easy Count (subtle) -->
+  <text x="100" y="50" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">EC</text>
+</svg>

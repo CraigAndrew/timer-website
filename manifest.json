@@ -1,0 +1,17 @@
+{
+  "name": "Easy Count Timer",
+  "short_name": "Easy Count",
+  "description": "Simple timer counter for all your timing needs",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4285F4",
+  "theme_color": "#4285F4",
+  "icons": [
+    {
+      "src": "easy-count-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+} 

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Easy Count</title>
+    <link rel="icon" href="easy-count-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="easy-count-icon.svg">
+    <meta id="themeColor" name="theme-color" content="#4285F4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Learn about Easy Count - Simple timer counter for all your timing needs">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --primary-dark: #3a5bd7;
+            --primary-light: #7a90f9;
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --danger-color: #F44336;
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --border-color: #eee;
+            --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 15px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --radius-sm: 5px;
+            --radius-md: 10px;
+            --radius-lg: 15px;
+            --spacing-xs: 5px;
+            --spacing-sm: 10px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+            --spacing-xl: 40px;
+            
+            /* Dark theme variables */
+            --dark-bg: #1a1a1a;
+            --dark-card-bg: #2c2c2c;
+            --dark-text: #f5f5f5;
+            --dark-border: #444;
+            --dark-input-bg: #3c3c3c;
+            --dark-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--spacing-md);
+            position: relative;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--spacing-lg);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        nav {
+            display: flex;
+            gap: 20px;
+            font-weight: 500;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: -2px;
+            left: 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-icon:hover {
+            transform: rotate(15deg);
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .theme-switcher {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .theme-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background-color: var(--card-bg);
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .theme-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        body.light-theme #lightTheme {
+            border-color: var(--primary-color);
+        }
+        
+        body.dark-theme #darkTheme {
+            border-color: var(--primary-color);
+        }
+        
+        body.blue-theme #blueTheme {
+            border-color: var(--primary-color);
+        }
+        
+        body.green-theme #greenTheme {
+            border-color: var(--primary-color);
+        }
+        
+        /* Content section */
+        .page-content {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 32px;
+            margin-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: var(--spacing-sm);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .team-member {
+            flex: 1;
+            min-width: 250px;
+            background-color: var(--background-color);
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .team-member h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        .team-member p {
+            margin-bottom: 0;
+        }
+        
+        .feature-highlight {
+            background-color: var(--background-color);
+            border-left: 4px solid var(--primary-color);
+            padding: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        
+        footer {
+            background-color: #f0f2f5;
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            margin-top: var(--spacing-xl);
+            border-top: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+        
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Dark theme SVG adjustments */
+        body.dark-theme .logo-icon svg .counter-display {
+            fill: var(--dark-card-bg);
+        }
+        
+        body.dark-theme .logo-icon svg .counter-numbers {
+            fill: var(--dark-text);
+        }
+        
+        /* Theme-specific logo colors */
+        body.blue-theme .logo-icon svg .primary-bg {
+            fill: #3a87c5;
+        }
+        
+        body.blue-theme .logo-icon svg .primary-light {
+            fill: #6aa7d5;
+        }
+        
+        body.green-theme .logo-icon svg .primary-bg {
+            fill: #39a275;
+        }
+        
+        body.green-theme .logo-icon svg .primary-light {
+            fill: #59c295;
+        }
+        
+        /* Dark mode specific styles */
+        body.dark-theme {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        body.dark-theme header {
+            border-bottom-color: var(--dark-border);
+        }
+        
+        body.dark-theme .page-content {
+            background-color: var(--dark-card-bg);
+            box-shadow: var(--dark-shadow);
+        }
+        
+        body.dark-theme h1 {
+            border-bottom-color: var(--dark-border);
+        }
+        
+        body.dark-theme .team-member {
+            background-color: var(--dark-input-bg);
+        }
+        
+        body.dark-theme .feature-highlight {
+            background-color: var(--dark-input-bg);
+        }
+        
+        body.dark-theme footer {
+            background-color: #222;
+            border-top-color: var(--dark-border);
+        }
+        
+        body.dark-theme .footer-links a {
+            color: #aaa;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: var(--spacing-sm);
+            }
+            
+            nav {
+                order: 3;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 5px;
+            }
+            
+            .theme-switcher {
+                order: 2;
+            }
+            
+            .team-members {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Logo and Navigation -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background Circle -->
+                    <circle class="primary-bg" cx="24" cy="24" r="23" fill="var(--primary-color)"/>
+                    <!-- Inner Circle -->
+                    <circle class="primary-light" cx="24" cy="24" r="18" fill="var(--primary-light)"/>
+                    <!-- Counter Display Background -->
+                    <rect class="counter-display" x="16" y="19" width="16" height="10" rx="2" fill="white"/>
+                    <!-- Counter Numbers -->
+                    <text class="counter-numbers" x="24" y="27" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="10" fill="#333">42</text>
+                    <!-- Plus Button -->
+                    <circle cx="35" cy="16" r="6" fill="var(--success-color)"/>
+                    <path d="M35 13V19M32 16H38" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <!-- Minus Button -->
+                    <circle cx="35" cy="32" r="6" fill="var(--danger-color)"/>
+                    <path d="M32 32H38" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <!-- EC initials -->
+                    <text x="14" y="28" font-family="Arial" font-size="5" font-weight="bold" fill="rgba(255,255,255,0.7)">EC</text>
+                </svg>
+            </div>
+            <div class="logo-text">Easy Counter</div>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </nav>
+        <div class="theme-switcher">
+            <button id="lightTheme" class="theme-btn" title="Light Theme">☀️</button>
+            <button id="darkTheme" class="theme-btn" title="Dark Theme">🌙</button>
+            <button id="blueTheme" class="theme-btn" title="Blue Theme">🔵</button>
+            <button id="greenTheme" class="theme-btn" title="Green Theme">🟢</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="page-content">
+            <h1>About Easy Counter</h1>
+            
+            <p>Easy Counter is a versatile and user-friendly timer application designed to help you manage your time effectively. Whether you're cooking, working out, studying, or managing work sessions, our intuitive timer provides the tools you need to stay on track.</p>
+            
+            <div class="feature-highlight">
+                <p><strong>Our mission:</strong> To provide a simple yet powerful timing solution that helps people be more productive and mindful of their time.</p>
+            </div>
+            
+            <h2>Our Story</h2>
+            <p>Easy Counter began in 2022 when our founder, a productivity enthusiast, became frustrated with the complicated timer applications available on the market. Most timers were either too basic with limited functionality or too complex with overwhelming features.</p>
+            
+            <p>With a vision to create something that struck the perfect balance between simplicity and functionality, Easy Counter was born. Our team of developers and designers worked together to create an intuitive interface that anyone could use, while incorporating powerful features for those who needed them.</p>
+            
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>Multiple Timer Types:</strong> Countdown, stopwatch, interval, and pomodoro timers in one application</li>
+                <li><strong>Customizable Alerts:</strong> Choose from various alert sounds or upload your own</li>
+                <li><strong>Visual Themes:</strong> Select from light, dark, blue, or green themes</li>
+                <li><strong>Save & Share:</strong> Save your timer configurations and share them with others</li>
+                <li><strong>Full Screen Mode:</strong> Perfect for presentations or when you need maximum visibility</li>
+                <li><strong>Mobile Friendly:</strong> Works seamlessly across devices</li>
+            </ul>
+            
+            <h2>Our Team</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <h3>Alex Chen</h3>
+                    <p>Founder & Lead Developer</p>
+                    <p>Alex has over 10 years of experience in web development and a passion for creating intuitive user interfaces.</p>
+                </div>
+                
+                <div class="team-member">
+                    <h3>Sarah Johnson</h3>
+                    <p>UX/UI Designer</p>
+                    <p>Sarah brings her expertise in user experience design to ensure Easy Counter is both beautiful and functional.</p>
+                </div>
+                
+                <div class="team-member">
+                    <h3>Marcus Williams</h3>
+                    <p>Front-End Developer</p>
+                    <p>Marcus specializes in creating responsive, accessible web applications that work on any device.</p>
+                </div>
+            </div>
+            
+            <h2>Our Values</h2>
+            <p>At Easy Counter, we believe in:</p>
+            <ul>
+                <li><strong>Simplicity:</strong> We strive to make our application easy to use without sacrificing functionality</li>
+                <li><strong>Accessibility:</strong> Our timer is designed to be used by everyone, regardless of technical skill</li>
+                <li><strong>Continuous Improvement:</strong> We regularly update our application based on user feedback</li>
+                <li><strong>Privacy:</strong> We respect your data and privacy (see our <a href="privacy.html">Privacy Policy</a>)</li>
+            </ul>
+            
+            <h2>Get in Touch</h2>
+            <p>We love hearing from our users! If you have any questions, suggestions, or feedback, please <a href="contact.html">contact us</a>.</p>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">© 2024 Easy Count. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Theme switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default theme if none is stored
+            if (!localStorage.getItem('theme')) {
+                localStorage.setItem('theme', 'light-theme');
+            }
+            
+            // Apply saved theme
+            const savedTheme = localStorage.getItem('theme');
+            document.body.classList.add(savedTheme);
+            
+            // Set the theme color accordingly
+            if (savedTheme === 'blue-theme') {
+                document.body.classList.add('blue-theme');
+                document.getElementById('themeColor').content = '#3a87c5';
+            } else if (savedTheme === 'green-theme') {
+                document.body.classList.add('green-theme');
+                document.getElementById('themeColor').content = '#39a275';
+            } else if (savedTheme === 'dark-theme') {
+                document.body.classList.add('dark-theme');
+                document.getElementById('themeColor').content = '#222222';
+            }
+            
+            // Theme buttons
+            document.getElementById('lightTheme').addEventListener('click', function() {
+                setTheme('light-theme');
+            });
+            
+            document.getElementById('darkTheme').addEventListener('click', function() {
+                setTheme('dark-theme');
+            });
+            
+            document.getElementById('blueTheme').addEventListener('click', function() {
+                setTheme('blue-theme');
+            });
+            
+            document.getElementById('greenTheme').addEventListener('click', function() {
+                setTheme('green-theme');
+            });
+        });
+        
+        function setTheme(theme) {
+            // Remove all theme classes
+            document.body.classList.remove('light-theme', 'dark-theme', 'blue-theme', 'green-theme');
+            
+            // Add selected theme
+            document.body.classList.add(theme);
+            
+            // Save theme preference
+            localStorage.setItem('theme', theme);
+            
+            // Update theme color meta tag
+            if (theme === 'blue-theme') {
+                document.getElementById('themeColor').content = '#3a87c5';
+            } else if (theme === 'green-theme') {
+                document.getElementById('themeColor').content = '#39a275';
+            } else if (theme === 'dark-theme') {
+                document.getElementById('themeColor').content = '#222222';
+            } else {
+                document.getElementById('themeColor').content = '#f8f9fa';
+            }
+        }
+    </script>
+</body>
+</html> 

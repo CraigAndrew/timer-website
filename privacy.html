@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Easy Count</title>
+    <link rel="icon" href="easy-count-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="easy-count-icon.svg">
+    <meta id="themeColor" name="theme-color" content="#4285F4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Privacy Policy for Easy Count - Simple timer counter for all your timing needs">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --primary-dark: #3a5bd7;
+            --primary-light: #7a90f9;
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --danger-color: #F44336;
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --border-color: #eee;
+            --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 15px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --radius-sm: 5px;
+            --radius-md: 10px;
+            --radius-lg: 15px;
+            --spacing-xs: 5px;
+            --spacing-sm: 10px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+            --spacing-xl: 40px;
+            
+            /* Dark theme variables */
+            --dark-bg: #1a1a1a;
+            --dark-card-bg: #2c2c2c;
+            --dark-text: #f5f5f5;
+            --dark-border: #444;
+            --dark-input-bg: #3c3c3c;
+            --dark-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--spacing-md);
+            position: relative;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--spacing-lg);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        nav {
+            display: flex;
+            gap: 20px;
+            font-weight: 500;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: -2px;
+            left: 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-icon:hover {
+            transform: rotate(15deg);
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .theme-switcher {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .theme-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background-color: var(--card-bg);
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .theme-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        body.light-theme #lightTheme {
+            border-color: var(--primary-color);
+        }
+        
+        body.dark-theme #darkTheme {
+            border-color: var(--primary-color);
+        }
+        
+        body.blue-theme #blueTheme {
+            border-color: var(--primary-color);
+        }
+        
+        body.green-theme #greenTheme {
+            border-color: var(--primary-color);
+        }
+        
+        /* Content section */
+        .page-content {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 32px;
+            margin-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: var(--spacing-sm);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .last-updated {
+            background-color: var(--background-color);
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-sm);
+            display: inline-block;
+            margin-bottom: var(--spacing-md);
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .policy-section {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        footer {
+            background-color: #f0f2f5;
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            margin-top: var(--spacing-xl);
+            border-top: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+        
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Dark theme SVG adjustments */
+        body.dark-theme .logo-icon svg .counter-display {
+            fill: var(--dark-card-bg);
+        }
+        
+        body.dark-theme .logo-icon svg .counter-numbers {
+            fill: var(--dark-text);
+        }
+        
+        /* Theme-specific logo colors */
+        body.blue-theme .logo-icon svg .primary-bg {
+            fill: #3a87c5;
+        }
+        
+        body.blue-theme .logo-icon svg .primary-light {
+            fill: #6aa7d5;
+        }
+        
+        body.green-theme .logo-icon svg .primary-bg {
+            fill: #39a275;
+        }
+        
+        body.green-theme .logo-icon svg .primary-light {
+            fill: #59c295;
+        }
+        
+        /* Dark mode specific styles */
+        body.dark-theme {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        body.dark-theme header {
+            border-bottom-color: var(--dark-border);
+        }
+        
+        body.dark-theme .page-content {
+            background-color: var(--dark-card-bg);
+            box-shadow: var(--dark-shadow);
+        }
+        
+        body.dark-theme h1 {
+            border-bottom-color: var(--dark-border);
+        }
+        
+        body.dark-theme .last-updated {
+            background-color: var(--dark-input-bg);
+            color: #aaa;
+        }
+        
+        body.dark-theme footer {
+            background-color: #222;
+            border-top-color: var(--dark-border);
+        }
+        
+        body.dark-theme .footer-links a {
+            color: #aaa;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: var(--spacing-sm);
+            }
+            
+            nav {
+                order: 3;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 5px;
+            }
+            
+            .theme-switcher {
+                order: 2;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Logo and Navigation -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background Circle -->
+                    <circle class="primary-bg" cx="24" cy="24" r="23" fill="var(--primary-color)"/>
+                    <!-- Inner Circle -->
+                    <circle class="primary-light" cx="24" cy="24" r="18" fill="var(--primary-light)"/>
+                    <!-- Counter Display Background -->
+                    <rect class="counter-display" x="16" y="19" width="16" height="10" rx="2" fill="white"/>
+                    <!-- Counter Numbers -->
+                    <text class="counter-numbers" x="24" y="27" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="10" fill="#333">42</text>
+                    <!-- Plus Button -->
+                    <circle cx="35" cy="16" r="6" fill="var(--success-color)"/>
+                    <path d="M35 13V19M32 16H38" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <!-- Minus Button -->
+                    <circle cx="35" cy="32" r="6" fill="var(--danger-color)"/>
+                    <path d="M32 32H38" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <!-- EC initials -->
+                    <text x="14" y="28" font-family="Arial" font-size="5" font-weight="bold" fill="rgba(255,255,255,0.7)">EC</text>
+                </svg>
+            </div>
+            <div class="logo-text">Easy Counter</div>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="privacy.html" class="active">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </nav>
+        <div class="theme-switcher">
+            <button id="lightTheme" class="theme-btn" title="Light Theme">☀️</button>
+            <button id="darkTheme" class="theme-btn" title="Dark Theme">🌙</button>
+            <button id="blueTheme" class="theme-btn" title="Blue Theme">🔵</button>
+            <button id="greenTheme" class="theme-btn" title="Green Theme">🟢</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="page-content">
+            <h1>Privacy Policy</h1>
+            <div class="last-updated">Last Updated: May 15, 2024</div>
+            
+            <p>Easy Counter ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how your personal information is collected, used, and disclosed by Easy Counter.</p>
+            
+            <p>This Privacy Policy applies to our website (easycounter.com) and our Easy Counter application (the "App") (collectively, our "Service").</p>
+            
+            <p>By accessing or using our Service, you signify that you have read, understood, and agree to our collection, storage, use, and disclosure of your personal information as described in this Privacy Policy.</p>
+            
+            <div class="policy-section">
+                <h2>Information We Collect</h2>
+                <p>Our primary goal in collecting information is to provide and improve our Service and to enable users to enjoy and easily navigate the Service.</p>
+                
+                <h3>Information You Provide to Us:</h3>
+                <ul>
+                    <li><strong>Account Information:</strong> If you create an account, we may collect your name, email address, username, and password.</li>
+                    <li><strong>User Content:</strong> If you choose to save timer configurations, we collect and store those configurations to provide the service.</li>
+                    <li><strong>Communications:</strong> If you contact us directly, we may receive additional information about you such as your name, email address, and the contents of the message.</li>
+                </ul>
+                
+                <h3>Information We Collect Automatically:</h3>
+                <ul>
+                    <li><strong>Usage Data:</strong> When you use our Service, we may collect certain information automatically, including:
+                        <ul>
+                            <li>Device information (such as your IP address, browser type, and operating system)</li>
+                            <li>Usage patterns (such as features used and time spent on the Service)</li>
+                            <li>General geographic location (country or city) based on IP address</li>
+                        </ul>
+                    </li>
+                    <li><strong>Cookies and Similar Technologies:</strong> We use cookies and similar technologies to collect information about your browsing activities and to distinguish you from other users.</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h2>How We Use Your Information</h2>
+                <p>We use the information we collect for various purposes, including to:</p>
+                <ul>
+                    <li>Provide, maintain, and improve our Service</li>
+                    <li>Personalize your experience and deliver content relevant to your interests</li>
+                    <li>Process and fulfill your requests and send you related information</li>
+                    <li>Send you technical notices, updates, security alerts, and support messages</li>
+                    <li>Respond to your comments, questions, and requests</li>
+                    <li>Monitor and analyze trends, usage, and activities in connection with our Service</li>
+                    <li>Detect, investigate, and prevent security incidents and other malicious, deceptive, fraudulent, or illegal activity</li>
+                    <li>Debug to identify and repair errors in our Service</li>
+                    <li>Protect the rights, privacy, safety, or property of Easy Counter, you, or others</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h2>Sharing of Information</h2>
+                <p>We may share the information we collect in various ways, including:</p>
+                <ul>
+                    <li><strong>Vendors and Service Providers:</strong> We may share information with third-party vendors and service providers who need access to such information to carry out work on our behalf.</li>
+                    <li><strong>Analytics Partners:</strong> We use analytics services such as Google Analytics to collect and process certain analytics data. These services may also collect information about your use of other websites, apps, and online resources.</li>
+                    <li><strong>As Required by Law:</strong> We may disclose information if we believe in good faith that such disclosure is necessary to (a) comply with relevant laws or regulatory obligations; (b) protect and defend the rights or property of Easy Counter; (c) protect the personal safety of users of our Service or the public.</li>
+                    <li><strong>Business Transfers:</strong> We may share or transfer information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h2>Your Rights and Choices</h2>
+                <p>Depending on your location, you may have certain rights regarding your personal information:</p>
+                <ul>
+                    <li><strong>Access and Update:</strong> You can access and update certain information through your account settings.</li>
+                    <li><strong>Opt-out:</strong> You may opt out of receiving promotional communications from us by following the instructions in those communications.</li>
+                    <li><strong>Cookies:</strong> Most web browsers are set to accept cookies by default. You can usually choose to set your browser to remove or reject cookies.</li>
+                    <li><strong>Data Subject Rights:</strong> In certain jurisdictions, you may have the right to request access to, correction of, deletion of, or restrictions on the processing of your personal data. Please contact us as described below to exercise these rights.</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h2>Data Retention</h2>
+                <p>We store the information we collect for as long as is necessary for the purpose(s) for which we originally collected it or for other legitimate business purposes, including to meet our legal, regulatory, or other compliance obligations.</p>
+            </div>
+            
+            <div class="policy-section">
+                <h2>Security</h2>
+                <p>We use reasonable measures to help protect information about you from loss, theft, misuse, unauthorized access, disclosure, alteration, and destruction. However, no Internet or email transmission is ever fully secure or error-free.</p>
+            </div>
+            
+            <div class="policy-section">
+                <h2>Children's Privacy</h2>
+                <p>Our Service is not directed to children under the age of 13, and we do not knowingly collect personal information from children under the age of 13. If we learn that we have collected personal information from a child under the age of 13, we will promptly delete that information.</p>
+            </div>
+            
+            <div class="policy-section">
+                <h2>International Data Transfers</h2>
+                <p>We may transfer the information we collect about you to countries other than the country where you initially provided the information for the purposes of providing the Service. Those countries may not have the same data protection laws as your country. By using the Service, you consent to the transfer of your information to the United States or any other country in which we or our service providers maintain facilities.</p>
+            </div>
+            
+            <div class="policy-section">
+                <h2>Changes to This Privacy Policy</h2>
+                <p>We may modify this Privacy Policy from time to time. When we make changes, we will update the "Last Updated" date at the top of this policy and notify you as required by applicable law. Your continued use of our Service after the revised Policy has become effective indicates that you have read, understood, and agreed to the current version.</p>
+            </div>
+            
+            <div class="policy-section">
+                <h2>Contact Us</h2>
+                <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:</p>
+                <p>
+                    Easy Counter, Inc.<br>
+                    123 Timer Street<br>
+                    San Francisco, CA 94105<br>
+                    Email: privacy@easycounter.com
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">© 2024 Easy Count. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Theme switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default theme if none is stored
+            if (!localStorage.getItem('theme')) {
+                localStorage.setItem('theme', 'light-theme');
+            }
+            
+            // Apply saved theme
+            const savedTheme = localStorage.getItem('theme');
+            document.body.classList.add(savedTheme);
+            
+            // Set the theme color accordingly
+            if (savedTheme === 'blue-theme') {
+                document.body.classList.add('blue-theme');
+                document.getElementById('themeColor').content = '#3a87c5';
+            } else if (savedTheme === 'green-theme') {
+                document.body.classList.add('green-theme');
+                document.getElementById('themeColor').content = '#39a275';
+            } else if (savedTheme === 'dark-theme') {
+                document.body.classList.add('dark-theme');
+                document.getElementById('themeColor').content = '#222222';
+            }
+            
+            // Theme buttons
+            document.getElementById('lightTheme').addEventListener('click', function() {
+                setTheme('light-theme');
+            });
+            
+            document.getElementById('darkTheme').addEventListener('click', function() {
+                setTheme('dark-theme');
+            });
+            
+            document.getElementById('blueTheme').addEventListener('click', function() {
+                setTheme('blue-theme');
+            });
+            
+            document.getElementById('greenTheme').addEventListener('click', function() {
+                setTheme('green-theme');
+            });
+        });
+        
+        function setTheme(theme) {
+            // Remove all theme classes
+            document.body.classList.remove('light-theme', 'dark-theme', 'blue-theme', 'green-theme');
+            
+            // Add selected theme
+            document.body.classList.add(theme);
+            
+            // Save theme preference
+            localStorage.setItem('theme', theme);
+            
+            // Update theme color meta tag
+            if (theme === 'blue-theme') {
+                document.getElementById('themeColor').content = '#3a87c5';
+            } else if (theme === 'green-theme') {
+                document.getElementById('themeColor').content = '#39a275';
+            } else if (theme === 'dark-theme') {
+                document.getElementById('themeColor').content = '#222222';
+            } else {
+                document.getElementById('themeColor').content = '#f8f9fa';
+            }
+        }
+    </script>
+</body>
+</html> 

@@ -4,79 +4,228 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Easy Count</title>
+    <link rel="icon" href="easy-count-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="easy-count-icon.svg">
+    <meta id="themeColor" name="theme-color" content="#4285F4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Easy Count - Simple timer counter for all your timing needs">
+    <link rel="manifest" href="manifest.json">
     <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --primary-dark: #3a5bd7;
+            --primary-light: #7a90f9;
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --danger-color: #F44336;
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --border-color: #eee;
+            --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 15px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --radius-sm: 5px;
+            --radius-md: 10px;
+            --radius-lg: 15px;
+            --spacing-xs: 5px;
+            --spacing-sm: 10px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+            --spacing-xl: 40px;
+            
+            /* Dark theme variables */
+            --dark-bg: #1a1a1a;
+            --dark-card-bg: #2c2c2c;
+            --dark-text: #f5f5f5;
+            --dark-border: #444;
+            --dark-input-bg: #3c3c3c;
+            --dark-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: var(--spacing-md);
+            position: relative;
         }
         
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #eee;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--spacing-lg);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        nav {
+            display: flex;
+            gap: 20px;
+            font-weight: 500;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: -2px;
+            left: 0;
         }
         
         .logo {
-            font-size: 24px;
+            font-size: 32px;
             font-weight: bold;
-            color: #4a6cf7;
+            color: var(--primary-color);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: -0.5px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-icon:hover {
+            transform: rotate(15deg);
+        }
+        
+        .logo a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+        
+        .logo a:hover {
+            color: var(--primary-dark);
+        }
+        
+        .logo-slogan {
+            font-size: 14px;
+            font-weight: normal;
+            color: #777;
+            margin-top: -5px;
+            letter-spacing: normal;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-theme .logo-slogan {
+            color: #aaa;
+        }
+        
+        body.blue-theme .logo-slogan {
+            color: #6a97c5;
+        }
+        
+        body.green-theme .logo-slogan {
+            color: #59a275;
+        }
+        
+        /* Ad container styles */
+        .ad-container {
+            display: flex;
+            justify-content: center;
+            margin: var(--spacing-md) 0;
+            transition: all 0.3s ease;
         }
         
         .ad-banner {
-            background-color: #f0f0f0;
-            padding: 15px;
+            padding: var(--spacing-sm);
             text-align: center;
-            margin: 20px 0;
-            border-radius: 4px;
-            border: 1px dashed #ccc;
+            margin: var(--spacing-md) 0;
+            overflow: hidden;
+            width: 100%;
+            height: auto;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         
+        /* Main timer section */
         .timer-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 40px auto;
+            margin: var(--spacing-xl) auto;
             width: 100%;
             max-width: 800px;
         }
         
         .timer-display {
-            font-size: 80px;
+            font-size: 90px;
             font-weight: bold;
-            background-color: #fff;
-            padding: 30px 50px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            background-color: var(--card-bg);
+            padding: var(--spacing-lg) var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: var(--spacing-lg);
             width: 500px;
             text-align: center;
-            color: #4a6cf7;
+            color: var(--primary-color);
             position: relative;
             margin-left: auto;
             margin-right: auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            user-select: none;
+        }
+        
+        .timer-display:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
         
         .timer-display input {
-            font-size: 80px;
+            font-size: 90px;
             font-weight: bold;
             width: 100%;
             text-align: center;
-            color: #4a6cf7;
+            color: var(--primary-color);
             border: none;
             outline: none;
             background: transparent;
             font-family: inherit;
+            transition: color 0.3s ease;
         }
         
         /* Time unit control styles */
@@ -91,10 +240,10 @@
         .unit-arrow {
             background: none;
             border: none;
-            font-size: 24px;
-            color: #4a6cf7;
+            font-size: 26px;
+            color: var(--primary-color);
             cursor: pointer;
-            padding: 5px;
+            padding: var(--spacing-xs);
             opacity: 0.7;
             transition: all 0.2s ease;
             position: absolute;
@@ -103,9 +252,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 2;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         
-        /* Position bottom arrows closer to the numbers */
         .hours-down, .minutes-down, .seconds-down {
             bottom: 20px;
         }
@@ -113,40 +263,82 @@
         .unit-arrow:hover {
             opacity: 1;
             transform: scale(1.2);
+            color: var(--primary-light);
         }
-        
-        /* Removing static positioning - now handled by JavaScript */
         
         .timer-controls {
             display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: var(--spacing-lg);
             justify-content: center;
             width: 100%;
         }
         
         .timer-button {
-            padding: 12px 30px;
+            padding: 14px 32px;
             font-size: 18px;
             border: none;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
         .start {
-            background-color: #4CAF50;
+            background-color: var(--success-color);
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .start:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
+            pointer-events: none;
         }
         
         .pause {
-            background-color: #FFC107;
-            color: #333;
+            background-color: var(--warning-color);
+            color: var(--text-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pause:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
+            pointer-events: none;
         }
         
         .reset {
-            background-color: #F44336;
+            background-color: var(--danger-color);
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reset:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
+            pointer-events: none;
         }
         
         .disabled-button {
@@ -156,24 +348,30 @@
         
         .timer-button:not(.disabled-button):hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .timer-button:not(.disabled-button):active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
         .timer-settings {
             display: flex;
             flex-wrap: nowrap;
-            gap: 20px;
+            gap: var(--spacing-md);
             justify-content: space-evenly;
-            background-color: #fff;
-            padding: 20px 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
+            background-color: var(--card-bg);
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-lg);
             width: 90%;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             overflow-x: auto;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         
         .setting-group {
@@ -185,55 +383,103 @@
         }
         
         .setting-group label {
-            margin-bottom: 5px;
+            margin-bottom: var(--spacing-xs);
             font-weight: 500;
             text-align: center;
+            color: var(--text-color);
+            transition: color 0.3s ease;
         }
         
         .setting-group select, .setting-group input {
-            padding: 8px 12px;
-            border-radius: 5px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
             border: 1px solid #ddd;
             width: 150px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+            font-size: 15px;
+        }
+        
+        .setting-group select:focus, .setting-group input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.2);
+            outline: none;
         }
         
         /* Custom styles for the volume slider */
         .volume-slider input[type="range"] {
-            width: 120px;
+            width: 130px;
             padding: 8px 0;
+            -webkit-appearance: none;
+            height: 6px;
+            background: #ddd;
+            border-radius: 5px;
+            margin-top: 12px;
+            transition: background 0.3s ease;
+        }
+        
+        .volume-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: background 0.3s ease;
+        }
+        
+        .volume-slider input[type="range"]::-webkit-slider-thumb:hover {
+            background: var(--primary-light);
+            transform: scale(1.1);
         }
         
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            margin: 40px 0;
+            margin: var(--spacing-xl) 0;
         }
         
         .feature-card {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            background-color: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
+            border-top: 3px solid var(--primary-color);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
         }
         
         .feature-card h3 {
-            color: #4a6cf7;
+            color: var(--primary-color);
             margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .feature-card p {
+            margin-bottom: 0;
+            flex-grow: 1;
+            transition: color 0.3s ease;
         }
         
         footer {
             background-color: #f0f2f5;
-            padding: 20px 0;
+            padding: var(--spacing-md) 0;
             text-align: center;
-            margin-top: 60px;
-            border-top: 1px solid #eee;
+            margin-top: var(--spacing-xl);
+            border-top: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .footer-content {
@@ -244,28 +490,18 @@
         
         .footer-links {
             display: flex;
-            gap: 20px;
+            gap: var(--spacing-md);
         }
         
         .footer-links a {
             color: #666;
             text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
         }
         
         .footer-links a:hover {
-            color: #4a6cf7;
-        }
-        
-        @media (max-width: 768px) {
-            .timer-display {
-                font-size: 60px;
-                width: 90%;
-                padding: 20px;
-            }
-            
-            .timer-settings {
-                width: 95%;
-            }
+            color: var(--primary-color);
         }
         
         /* Ad spaces styling */
@@ -276,17 +512,330 @@
             transform: translateY(-50%);
             width: 160px;
             height: 600px;
-            background-color: #f0f0f0;
-            border: 1px dashed #ccc;
+            overflow: hidden;
+            z-index: 10;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Dark mode specific styles */
+        body.dark-theme {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        body.dark-theme header {
+            border-bottom-color: var(--dark-border);
+        }
+        
+        body.dark-theme .ad-banner,
+        body.dark-theme .timer-display,
+        body.dark-theme .timer-settings,
+        body.dark-theme .feature-card,
+        body.dark-theme .ad-sidebar {
+            background-color: var(--dark-card-bg);
+            box-shadow: var(--dark-shadow);
+        }
+        
+        body.dark-theme .setting-group select,
+        body.dark-theme .setting-group input[type="text"],
+        body.dark-theme .timer-display input {
+            background-color: var(--dark-input-bg);
+            color: var(--dark-text);
+            border-color: var(--dark-border);
+        }
+        
+        body.dark-theme .volume-slider input[type="range"] {
+            background: #555;
+        }
+        
+        body.dark-theme .footer-links a {
+            color: #aaa;
+        }
+        
+        body.dark-theme footer {
+            background-color: #222;
+            border-top-color: var(--dark-border);
+        }
+        
+        /* Blue theme specific styles */
+        body.blue-theme {
+            background-color: #e6f7ff;
+            color: #333;
+        }
+        
+        body.blue-theme .primary-color {
+            color: #3a87c5;
+        }
+        
+        body.blue-theme .timer-display {
+            box-shadow: 0 10px 25px rgba(58, 135, 197, 0.15);
+            border-left: 3px solid #3a87c5;
+            border-right: 3px solid #3a87c5;
+        }
+        
+        body.blue-theme .timer-display input {
+            color: #3a87c5;
+        }
+        
+        body.blue-theme .unit-arrow {
+            color: #3a87c5;
+        }
+        
+        body.blue-theme .feature-card {
+            border-top: 3px solid #3a87c5;
+        }
+        
+        body.blue-theme .feature-card h3 {
+            color: #3a87c5;
+        }
+        
+        /* Green theme specific styles */
+        body.green-theme {
+            background-color: #e6ffee;
+            color: #333;
+        }
+        
+        body.green-theme .primary-color {
+            color: #39a275;
+        }
+        
+        body.green-theme .timer-display {
+            box-shadow: 0 10px 25px rgba(57, 162, 117, 0.15);
+            border-left: 3px solid #39a275;
+            border-right: 3px solid #39a275;
+        }
+        
+        body.green-theme .timer-display input {
+            color: #39a275;
+        }
+        
+        body.green-theme .unit-arrow {
+            color: #39a275;
+        }
+        
+        body.green-theme .feature-card {
+            border-top: 3px solid #39a275;
+        }
+        
+        body.green-theme .feature-card h3 {
+            color: #39a275;
+        }
+        
+        /* Timer pulse animation for different themes */
+        @keyframes pulse-blue {
+            0% {
+                box-shadow: 0 0 0 0 rgba(58, 135, 197, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(58, 135, 197, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(58, 135, 197, 0);
+            }
+        }
+        
+        @keyframes pulse-green {
+            0% {
+                box-shadow: 0 0 0 0 rgba(57, 162, 117, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(57, 162, 117, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(57, 162, 117, 0);
+            }
+        }
+        
+        @keyframes pulse-dark {
+            0% {
+                box-shadow: 0 0 0 0 rgba(100, 140, 255, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(100, 140, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(100, 140, 255, 0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(74, 108, 247, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(74, 108, 247, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(74, 108, 247, 0);
+            }
+        }
+        
+        .timer-running .timer-display {
+            animation: pulse 2s infinite;
+        }
+        
+        body.dark-theme .timer-running .timer-display {
+            animation: pulse-dark 2s infinite;
+        }
+        
+        body.blue-theme .timer-running .timer-display {
+            animation: pulse-blue 2s infinite;
+        }
+        
+        body.green-theme .timer-running .timer-display {
+            animation: pulse-green 2s infinite;
+        }
+        
+        /* Timer text subtle shadow */
+        .timer-display input {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.dark-theme .timer-display input {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 1280px) {
+            .ad-sidebar {
+                display: none; /* Hide sidebar ad on smaller screens */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: var(--spacing-sm);
+            }
+            
+            nav {
+                order: 3;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 5px;
+            }
+            
+            .theme-switcher {
+                order: 2;
+            }
+            
+            .timer-display {
+                font-size: 60px;
+                width: 90%;
+                padding: var(--spacing-md);
+            }
+            
+            .timer-display input {
+                font-size: 60px;
+            }
+            
+            .timer-with-controls {
+                width: 90%;
+            }
+            
+            .timer-settings {
+                width: 95%;
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-md);
+            }
+            
+            .setting-group {
+                width: 100%;
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timer-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .timer-button {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+        }
+        
+        /* Dark theme SVG adjustments */
+        body.dark-theme .logo-icon svg .counter-display {
+            fill: var(--dark-card-bg);
+        }
+        
+        body.dark-theme .logo-icon svg .counter-numbers {
+            fill: var(--dark-text);
+        }
+        
+        /* Theme-specific logo colors */
+        body.blue-theme .logo-icon svg .primary-bg {
+            fill: #3a87c5;
+        }
+        
+        body.blue-theme .logo-icon svg .primary-light {
+            fill: #6aa7d5;
+        }
+        
+        body.green-theme .logo-icon svg .primary-bg {
+            fill: #39a275;
+        }
+        
+        body.green-theme .logo-icon svg .primary-light {
+            fill: #59c295;
+        }
+        
+        /* Theme Switcher */
+        .theme-switcher {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .theme-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background-color: var(--card-bg);
+            cursor: pointer;
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 4px;
+            transition: all 0.2s ease;
         }
         
-        .ad-content {
-            text-align: center;
-            color: #999;
+        .theme-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        body.light-theme #lightTheme {
+            border-color: var(--primary-color);
+        }
+        
+        body.dark-theme #darkTheme {
+            border-color: var(--primary-color);
+        }
+        
+        body.blue-theme #blueTheme {
+            border-color: var(--primary-color);
+        }
+        
+        body.green-theme #greenTheme {
+            border-color: var(--primary-color);
         }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4103172499595304"
@@ -295,15 +844,58 @@
 <body>
     <!-- Header with Logo and Navigation -->
     <header>
-        <div class="container">
-            <div class="logo">Easy Count</div>
+        <div class="logo-container">
+            <div class="logo-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background Circle -->
+                    <circle class="primary-bg" cx="24" cy="24" r="23" fill="var(--primary-color)"/>
+                    <!-- Inner Circle -->
+                    <circle class="primary-light" cx="24" cy="24" r="18" fill="var(--primary-light)"/>
+                    <!-- Counter Display Background -->
+                    <rect class="counter-display" x="16" y="19" width="16" height="10" rx="2" fill="white"/>
+                    <!-- Counter Numbers -->
+                    <text class="counter-numbers" x="24" y="27" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="10" fill="#333">42</text>
+                    <!-- Plus Button -->
+                    <circle cx="35" cy="16" r="6" fill="var(--success-color)"/>
+                    <path d="M35 13V19M32 16H38" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <!-- Minus Button -->
+                    <circle cx="35" cy="32" r="6" fill="var(--danger-color)"/>
+                    <path d="M32 32H38" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <!-- EC initials -->
+                    <text x="14" y="28" font-family="Arial" font-size="5" font-weight="bold" fill="rgba(255,255,255,0.7)">EC</text>
+                </svg>
+            </div>
+            <div class="logo-text">Easy Counter</div>
+        </div>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </nav>
+        <div class="theme-switcher">
+            <button id="lightTheme" class="theme-btn" title="Light Theme">☀️</button>
+            <button id="darkTheme" class="theme-btn" title="Dark Theme">🌙</button>
+            <button id="blueTheme" class="theme-btn" title="Blue Theme">🔵</button>
+            <button id="greenTheme" class="theme-btn" title="Green Theme">🟢</button>
         </div>
     </header>
     
     <!-- Top Banner Ad Space -->
     <div class="container">
-        <div class="ad-banner">
-            <div class="ad-content">Top Banner Ad Space (728×90)</div>
+        <div class="ad-container">
+            <div class="ad-banner">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4103172499595304"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
         </div>
         
         <!-- Main Timer Section -->
@@ -360,16 +952,21 @@
                     <label for="volume">Volume</label>
                     <input type="range" id="volume" min="0" max="100" value="80">
                 </div>
-                
-                <div class="setting-group">
-                    <label for="theme">Theme</label>
-                    <select id="theme">
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                        <option value="blue">Blue</option>
-                        <option value="green">Green</option>
-                    </select>
-                </div>
+            </div>
+        </div>
+        
+        <!-- Ad container for mid-content ad -->
+        <div class="ad-container">
+            <div class="ad-banner">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4103172499595304"
+                     data-ad-slot="5432167890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
         </div>
         
@@ -407,25 +1004,42 @@
         </div>
         
         <!-- Bottom Banner Ad Space -->
-        <div class="ad-banner">
-            <div class="ad-content">Bottom Banner Ad Space (728×90)</div>
+        <div class="ad-container">
+            <div class="ad-banner">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4103172499595304"
+                     data-ad-slot="9876543210"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
         </div>
     </div>
     
     <!-- Sidebar Ad Space -->
     <div class="ad-sidebar">
-        <div class="ad-content">Sidebar Ad Space (160×600)</div>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4103172499595304"
+             data-ad-slot="5678901234"
+             data-ad-format="auto"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
     
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="copyright">© 2025 Easy Count. All rights reserved.</div>
+                <div class="copyright">© 2024 Easy Count. All rights reserved.</div>
                 <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Use</a>
-                    <a href="#">Contact</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                    <a href="contact.html">Contact</a>
                 </div>
             </div>
         </div>
@@ -661,6 +1275,10 @@
             
             clearInterval(timerInterval);
             isRunning = true;
+            
+            // Add timer-running class for pulse animation
+            document.querySelector('.timer-container').classList.add('timer-running');
+            
             timerInterval = setInterval(() => {
                 if (timerTypeSelect.value === 'countdown') {
                     // Count down
@@ -673,7 +1291,10 @@
                         isRunning = false;
                         // Update title to "Time is up!"
                         updateDocumentTitle('00:00:00');
-                        // Could add an alarm sound here
+                        // Play sound effect when timer ends
+                        playTimerEndSound();
+                        // Remove the timer-running class
+                        document.querySelector('.timer-container').classList.remove('timer-running');
                     }
                 } else {
                     // Count up for other timer types
@@ -693,6 +1314,8 @@
             
             clearInterval(timerInterval);
             isRunning = false;
+            // Remove timer-running class when paused
+            document.querySelector('.timer-container').classList.remove('timer-running');
             updateButtonStates();
         });
         
@@ -705,36 +1328,181 @@
             timerInput.value = formatTime(seconds);
             // Reset the document title back to original
             document.title = originalTitle;
+            // Remove timer-running class when reset
+            document.querySelector('.timer-container').classList.remove('timer-running');
             updateButtonStates();
         });
         
-        // Theme switching
-        const themeSelector = document.getElementById('theme');
-        themeSelector.addEventListener('change', () => {
-            const theme = themeSelector.value;
-            const root = document.documentElement;
+        // Function to play sound when timer ends
+        function playTimerEndSound() {
+            const soundType = document.getElementById('sound').value;
+            const volume = document.getElementById('volume').value / 100;
             
-            switch(theme) {
-                case 'dark':
-                    document.body.style.backgroundColor = '#222';
-                    document.body.style.color = '#fff';
-                    break;
-                case 'blue':
-                    document.body.style.backgroundColor = '#e6f7ff';
-                    document.body.style.color = '#333';
-                    break;
-                case 'green':
-                    document.body.style.backgroundColor = '#e6ffee';
-                    document.body.style.color = '#333';
-                    break;
-                default: // light
-                    document.body.style.backgroundColor = '#f8f9fa';
-                    document.body.style.color = '#333';
+            // Simple beep sound using Web Audio API
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Set volume
+                gainNode.gain.value = volume;
+                
+                // Configure sound based on selection
+                switch(soundType) {
+                    case 'beep':
+                        oscillator.type = 'sine';
+                        oscillator.frequency.value = 800;
+                        oscillator.start();
+                        setTimeout(() => oscillator.stop(), 500);
+                        break;
+                    case 'bell':
+                        oscillator.type = 'triangle';
+                        oscillator.frequency.value = 587.33; // D5
+                        oscillator.start();
+                        setTimeout(() => {
+                            oscillator.frequency.value = 880; // A5
+                            setTimeout(() => oscillator.stop(), 500);
+                        }, 500);
+                        break;
+                    case 'chirp':
+                        oscillator.type = 'sine';
+                        oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
+                        oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.5);
+                        oscillator.start();
+                        setTimeout(() => oscillator.stop(), 500);
+                        break;
+                    case 'alarm':
+                        let duration = 0;
+                        oscillator.type = 'square';
+                        oscillator.start();
+                        
+                        // Create alarm pattern
+                        const alarmPattern = setInterval(() => {
+                            oscillator.frequency.value = duration % 2 === 0 ? 800 : 600;
+                            duration++;
+                            if (duration > 6) {
+                                clearInterval(alarmPattern);
+                                oscillator.stop();
+                            }
+                        }, 200);
+                        break;
+                    default:
+                        oscillator.type = 'sine';
+                        oscillator.frequency.value = 800;
+                        oscillator.start();
+                        setTimeout(() => oscillator.stop(), 500);
+                }
+            } catch (e) {
+                console.log('Web Audio API not supported or user interaction required.');
             }
+        }
+        
+        // Theme switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default theme if none is stored
+            if (!localStorage.getItem('theme')) {
+                localStorage.setItem('theme', 'light-theme');
+            }
+            
+            // Apply saved theme
+            const savedTheme = localStorage.getItem('theme');
+            document.body.classList.add(savedTheme);
+            
+            // Set the theme color accordingly
+            if (savedTheme === 'blue-theme') {
+                document.body.classList.add('blue-theme');
+                document.getElementById('themeColor').content = '#3a87c5';
+            } else if (savedTheme === 'green-theme') {
+                document.body.classList.add('green-theme');
+                document.getElementById('themeColor').content = '#39a275';
+            } else if (savedTheme === 'dark-theme') {
+                document.body.classList.add('dark-theme');
+                document.getElementById('themeColor').content = '#222222';
+            }
+            
+            // Theme buttons
+            document.getElementById('lightTheme').addEventListener('click', function() {
+                setTheme('light-theme');
+            });
+            
+            document.getElementById('darkTheme').addEventListener('click', function() {
+                setTheme('dark-theme');
+            });
+            
+            document.getElementById('blueTheme').addEventListener('click', function() {
+                setTheme('blue-theme');
+            });
+            
+            document.getElementById('greenTheme').addEventListener('click', function() {
+                setTheme('green-theme');
+            });
+            
+            // Animate the logo counter on page load
+            animateLogoCounter();
         });
+        
+        function setTheme(theme) {
+            // Remove all theme classes
+            document.body.classList.remove('light-theme', 'dark-theme', 'blue-theme', 'green-theme');
+            
+            // Add selected theme
+            document.body.classList.add(theme);
+            
+            // Save theme preference
+            localStorage.setItem('theme', theme);
+            
+            // Update theme color meta tag
+            if (theme === 'blue-theme') {
+                document.getElementById('themeColor').content = '#3a87c5';
+            } else if (theme === 'green-theme') {
+                document.getElementById('themeColor').content = '#39a275';
+            } else if (theme === 'dark-theme') {
+                document.getElementById('themeColor').content = '#222222';
+            } else {
+                document.getElementById('themeColor').content = '#f8f9fa';
+            }
+        }
+        
+        // Logo counter animation
+        function animateLogoCounter() {
+            const counterText = document.querySelector('.logo-icon .counter-numbers');
+            if (!counterText) return;
+            
+            let count = 0;
+            const targetCount = 42;
+            const duration = 1500; // milliseconds
+            const interval = 50;
+            const increment = Math.ceil(targetCount / (duration / interval));
+            
+            const timer = setInterval(() => {
+                count = Math.min(count + increment, targetCount);
+                counterText.textContent = count;
+                
+                if (count >= targetCount) {
+                    clearInterval(timer);
+                }
+            }, interval);
+        }
         
         // Check for timer type changes to update button states
         timerTypeSelect.addEventListener('change', updateButtonStates);
+        
+        // Set a saved theme if it exists in local storage
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                themeSelector.value = savedTheme;
+                applyTheme(savedTheme);
+            }
+        });
+        
+        // Save theme preference
+        themeSelector.addEventListener('change', () => {
+            localStorage.setItem('theme', themeSelector.value);
+        });
     </script>
 </body>
 </html>
