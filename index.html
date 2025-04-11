@@ -863,6 +863,154 @@
             font-weight: bold;
             color: var(--primary-color);
         }
+        
+        /* Add styles for new content sections */
+        .content-section {
+            margin: 25px 0;
+            padding: 15px;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .content-section h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .usage-instructions, .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .instruction-step, .application-item {
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            background-color: rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        
+        .instruction-step:hover, .application-item:hover {
+            background-color: rgba(0,0,0,0.04);
+            transform: translateY(-2px);
+        }
+        
+        .instruction-step h3, .application-item h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 18px;
+        }
+        
+        .faq-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .faq-item {
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            background-color: rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            background-color: rgba(0,0,0,0.04);
+        }
+        
+        .faq-item h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .faq-item p {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .sidebar-content {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-content h3 {
+            font-size: 16px;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        
+        .sidebar-content p {
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        
+        .sidebar-content ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        
+        .sidebar-content li {
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        
+        /* Dark theme adjustments for content sections */
+        body.dark-theme .content-section {
+            background-color: var(--dark-card-bg);
+        }
+        
+        body.dark-theme .instruction-step,
+        body.dark-theme .application-item,
+        body.dark-theme .faq-item {
+            background-color: rgba(255,255,255,0.03);
+        }
+        
+        body.dark-theme .instruction-step:hover,
+        body.dark-theme .application-item:hover,
+        body.dark-theme .faq-item:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .content-section h1 {
+                font-size: 24px;
+            }
+            
+            .content-section h2 {
+                font-size: 20px;
+            }
+            
+            .usage-instructions, 
+            .applications-grid, 
+            .faq-items {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4103172499595304"
     crossorigin="anonymous"></script>
@@ -910,6 +1058,12 @@
     
     <!-- Top Banner Ad Space -->
     <div class="container">
+        <!-- Add intro text before the first ad -->
+        <div class="content-section">
+            <h1>Easy Count: Simple Timer Solutions</h1>
+            <p>Welcome to Easy Count, your go-to timer tool for productivity, fitness, cooking, and more. Our clean interface and flexible timer options help you track time effectively for any task.</p>
+        </div>
+        
         <div class="ad-container">
             <div class="ad-banner">
                 <ins class="adsbygoogle"
@@ -981,6 +1135,25 @@
             </div>
         </div>
         
+        <!-- Add content section before ad placement -->
+        <div class="content-section">
+            <h2>How to Use Easy Count</h2>
+            <div class="usage-instructions">
+                <div class="instruction-step">
+                    <h3>1. Select Your Timer Type</h3>
+                    <p>Choose from countdown, stopwatch, interval, or pomodoro timers depending on your specific timing needs.</p>
+                </div>
+                <div class="instruction-step">
+                    <h3>2. Set Your Time</h3>
+                    <p>Use the up and down arrows to adjust hours, minutes, and seconds or type in your desired time directly.</p>
+                </div>
+                <div class="instruction-step">
+                    <h3>3. Customize Your Alert</h3>
+                    <p>Select from various alert sounds and adjust the volume to ensure you'll notice when your timer completes.</p>
+                </div>
+            </div>
+        </div>
+        
         <!-- Ad container for mid-content ad -->
         <div class="ad-container">
             <div class="ad-banner">
@@ -1029,6 +1202,29 @@
             </div>
         </div>
         
+        <!-- Add more content before bottom ad -->
+        <div class="content-section">
+            <h2>Popular Timer Applications</h2>
+            <div class="applications-grid">
+                <div class="application-item">
+                    <h3>Pomodoro Technique</h3>
+                    <p>Boost productivity with focused 25-minute work sessions followed by 5-minute breaks. Easy Count helps you maintain this rhythm throughout your workday.</p>
+                </div>
+                <div class="application-item">
+                    <h3>Workout Intervals</h3>
+                    <p>Perfect for HIIT workouts, our interval timer lets you customize work and rest periods to match your fitness routine.</p>
+                </div>
+                <div class="application-item">
+                    <h3>Cooking & Baking</h3>
+                    <p>Never overcook a meal again. Set precise timers for each stage of your cooking process with customizable alerts.</p>
+                </div>
+                <div class="application-item">
+                    <h3>Study Sessions</h3>
+                    <p>Implement spaced repetition and timed study blocks to maximize learning efficiency and retention.</p>
+                </div>
+            </div>
+        </div>
+        
         <!-- Bottom Banner Ad Space -->
         <div class="ad-container">
             <div class="ad-banner">
@@ -1043,10 +1239,42 @@
                 </script>
             </div>
         </div>
+        
+        <!-- Add FAQ section at the bottom for more content -->
+        <div class="content-section faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-items">
+                <div class="faq-item">
+                    <h3>Does Easy Count work offline?</h3>
+                    <p>Yes! Once you've loaded the website, Easy Count will continue to function even without an internet connection.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I use multiple timers simultaneously?</h3>
+                    <p>While the current version supports one timer at a time, you can open multiple tabs to run separate timers concurrently.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Are my timer settings saved?</h3>
+                    <p>Yes, your theme preference is automatically saved. We're working on saving timer configurations in a future update.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is Easy Count free to use?</h3>
+                    <p>Absolutely! Easy Count is completely free and supported by minimal advertisements.</p>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Sidebar Ad Space -->
     <div class="ad-sidebar">
+        <div class="sidebar-content">
+            <h3>Timer Tips</h3>
+            <p>Make the most of your time with these quick tips:</p>
+            <ul>
+                <li>Use Pomodoro technique for better focus</li>
+                <li>Try interval timers for effective workouts</li>
+                <li>Set cooking timers with audible alerts</li>
+            </ul>
+        </div>
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-4103172499595304"
