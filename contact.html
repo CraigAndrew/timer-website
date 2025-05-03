@@ -4,13 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Easy Count</title>
+    <link rel="icon" href="easy-count-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="easy-count-icon.svg">
+    <meta id="themeColor" name="theme-color" content="#4285F4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Contact the Easy Count team for questions, feedback, or support">
+    <link rel="manifest" href="manifest.json">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4103172499595304" crossorigin="anonymous"></script>
     <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --primary-dark: #3a5bd7;
+            --primary-light: #7a90f9;
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --danger-color: #F44336;
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --border-color: #eee;
+            --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 15px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
         
@@ -25,18 +49,46 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
         }
         
         .logo {
             font-size: 24px;
             font-weight: bold;
-            color: #4a6cf7;
+            color: var(--primary-color);
         }
         
         .logo a {
             text-decoration: none;
-            color: #4a6cf7;
+            color: var(--primary-color);
+        }
+        
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: -2px;
+            left: 0;
         }
         
         .content {
@@ -44,19 +96,30 @@
         }
         
         h1 {
-            color: #4a6cf7;
+            color: var(--primary-color);
             margin-bottom: 30px;
+            font-size: 32px;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            font-size: 24px;
         }
         
         p {
             margin-bottom: 20px;
         }
         
+        .content-section {
+            margin-bottom: 40px;
+        }
+        
         .contact-info {
-            background-color: #fff;
+            background-color: var(--card-bg);
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-md);
             margin-bottom: 30px;
         }
         
@@ -65,15 +128,15 @@
         }
         
         .contact-method h3 {
-            color: #4a6cf7;
+            color: var(--primary-color);
             margin-bottom: 10px;
         }
         
         .contact-form {
-            background-color: #fff;
+            background-color: var(--card-bg);
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-md);
         }
         
         .form-group {
@@ -102,7 +165,7 @@
         }
         
         .submit-button {
-            background-color: #4a6cf7;
+            background-color: var(--primary-color);
             color: white;
             border: none;
             padding: 12px 25px;
@@ -113,7 +176,47 @@
         }
         
         .submit-button:hover {
-            background-color: #3a5bd7;
+            background-color: var(--primary-dark);
+        }
+        
+        .ad-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .ad-banner {
+            padding: 5px;
+            text-align: center;
+            width: 100%;
+            background-color: var(--card-bg);
+            border-radius: 5px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .faq-section {
+            margin: 40px 0;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .faq-item {
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .faq-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
         
         footer {
@@ -141,7 +244,7 @@
         }
         
         .footer-links a:hover {
-            color: #4a6cf7;
+            color: var(--primary-color);
         }
         
         @media (max-width: 768px) {
@@ -151,35 +254,88 @@
             }
         }
     </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4103172499595304"
-    crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header with Logo and Navigation -->
     <header>
         <div class="container">
             <div class="logo"><a href="index.html">Easy Count</a></div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+            </nav>
         </div>
     </header>
     
     <!-- Main Content -->
     <div class="container">
         <div class="content">
-            <h1>Contact Us</h1>
-            
-            <p>We'd love to hear from you! Whether you have a question, feedback, or just want to say hello, there are several ways to get in touch with us.</p>
+            <div class="content-section">
+                <h1>Contact Us</h1>
+                
+                <p>We'd love to hear from you! Whether you have questions, feedback, feature requests, or just want to say hello, there are several ways to get in touch with the Easy Count team.</p>
+                
+                <p>Our team is dedicated to providing excellent support and we typically respond to all inquiries within 1-2 business days.</p>
+            </div>
             
             <div class="contact-info">
                 <div class="contact-method">
                     <h3>Email</h3>
                     <p>For general inquiries: <a href="mailto:contact@easycount.app">contact@easycount.app</a></p>
-                    <p>For support: <a href="mailto:support@easycount.app">support@easycount.app</a></p>
+                    <p>For technical support: <a href="mailto:support@easycount.app">support@easycount.app</a></p>
+                    <p>For business partnerships: <a href="mailto:partners@easycount.app">partners@easycount.app</a></p>
                 </div>
                 
                 <div class="contact-method">
                     <h3>Social Media</h3>
                     <p>Follow us and send us a message on:</p>
                     <p>Twitter: <a href="https://twitter.com/easycountapp" target="_blank">@easycountapp</a></p>
+                    <p>Facebook: <a href="https://facebook.com/easycountapp" target="_blank">Easy Count</a></p>
+                </div>
+            </div>
+            
+            <!-- Ad placement with good surrounding content -->
+            <div class="ad-container">
+                <div class="ad-banner">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-4103172499595304"
+                         data-ad-slot="3214569870"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+            
+            <div class="faq-section">
+                <h2>Frequently Asked Contact Questions</h2>
+                
+                <div class="faq-item">
+                    <h3>What information should I include when reporting an issue?</h3>
+                    <p>When reporting a technical issue, please include:</p>
+                    <ul>
+                        <li>Your device type and operating system</li>
+                        <li>Browser name and version</li>
+                        <li>A detailed description of the issue</li>
+                        <li>Steps to reproduce the problem (if applicable)</li>
+                        <li>Screenshots or screen recordings (if possible)</li>
+                    </ul>
+                    <p>This helps us diagnose and resolve your issue more quickly.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>How long does it take to get a response?</h3>
+                    <p>We typically respond to all inquiries within 1-2 business days. For urgent issues, we try to respond even faster. Please note that response times may be longer during weekends and holidays.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>How can I suggest a new feature?</h3>
+                    <p>We love hearing your ideas! The best way to suggest a new feature is to email us at <a href="mailto:feedback@easycount.app">feedback@easycount.app</a> with "Feature Request" in the subject line. Please describe the feature in detail and explain how it would benefit users.</p>
                 </div>
             </div>
             
@@ -210,33 +366,39 @@
                 </form>
             </div>
         </div>
-    </div>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
+        
+        <footer>
             <div class="footer-content">
-                <div class="copyright">© 2025 Easy Count. All rights reserved.</div>
+                <div>&copy; 2023 Easy Count. All rights reserved.</div>
                 <div class="footer-links">
-                    <a href="privacy-policy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Use</a>
-                    <a href="contact.html">Contact</a>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
     
     <script>
-        // Simple form submission handling
+        // Simple form validation and submission
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // In a real application, you would send this data to your server
-            // For this example, we'll just show a success message
-            alert('Thank you for your message! We will get back to you soon.');
+            // In a real application, you would send the form data to your server here
             
-            // Clear the form
-            this.reset();
+            // For this demo, we'll just show a success message
+            const form = this;
+            const submitButton = form.querySelector('.submit-button');
+            
+            // Disable the button and change its text
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            
+            // Simulate form submission delay
+            setTimeout(function() {
+                form.innerHTML = '<div style="text-align: center; padding: 30px;"><h2 style="color: var(--success-color);">Thank You!</h2><p>Your message has been received. We\'ll get back to you as soon as possible.</p></div>';
+            }, 1500);
         });
     </script>
 </body>

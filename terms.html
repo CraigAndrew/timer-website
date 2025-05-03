@@ -3,75 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Use - Easy Count</title>
+    <title>Terms of Service - Easy Count</title>
+    <link rel="icon" href="easy-count-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="easy-count-icon.svg">
+    <meta id="themeColor" name="theme-color" content="#4285F4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Terms of Service for Easy Count - Simple timer counter for all your timing needs">
+    <link rel="manifest" href="manifest.json">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4103172499595304" crossorigin="anonymous"></script>
     <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --primary-dark: #3a5bd7;
+            --primary-light: #7a90f9;
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --danger-color: #F44336;
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --border-color: #eee;
+            --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 15px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --radius-sm: 5px;
+            --radius-md: 10px;
+            --radius-lg: 15px;
+            --spacing-xs: 5px;
+            --spacing-sm: 10px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
         
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
+            padding: var(--spacing-md);
         }
         
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #eee;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--spacing-lg);
         }
         
         .logo {
             font-size: 24px;
             font-weight: bold;
-            color: #4a6cf7;
+            color: var(--primary-color);
         }
         
         .logo a {
             text-decoration: none;
-            color: #4a6cf7;
+            color: var(--primary-color);
+        }
+        
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: -2px;
+            left: 0;
         }
         
         .content {
-            margin: 40px 0;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-lg);
         }
         
         h1 {
-            color: #4a6cf7;
-            margin-bottom: 30px;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+            font-size: 32px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: var(--spacing-sm);
         }
         
         h2 {
-            color: #4a6cf7;
-            margin-top: 30px;
-            margin-bottom: 15px;
+            color: var(--primary-color);
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-sm);
+            font-size: 24px;
         }
         
         p {
-            margin-bottom: 15px;
+            margin-bottom: var(--spacing-md);
         }
         
         ul {
-            margin-bottom: 20px;
+            margin-bottom: var(--spacing-md);
+            padding-left: 20px;
         }
         
         li {
             margin-bottom: 10px;
         }
         
+        .last-updated {
+            background-color: var(--background-color);
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-sm);
+            display: inline-block;
+            margin-bottom: var(--spacing-md);
+            font-style: italic;
+        }
+        
+        .ad-container {
+            display: flex;
+            justify-content: center;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .ad-banner {
+            padding: 5px;
+            text-align: center;
+            width: 100%;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .section-divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: var(--spacing-lg) 0;
+        }
+        
         footer {
             background-color: #f0f2f5;
-            padding: 20px 0;
+            padding: var(--spacing-md) 0;
             text-align: center;
-            margin-top: 60px;
-            border-top: 1px solid #eee;
+            margin-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-color);
         }
         
         .footer-content {
@@ -91,7 +189,7 @@
         }
         
         .footer-links a:hover {
-            color: #4a6cf7;
+            color: var(--primary-color);
         }
         
         @media (max-width: 768px) {
@@ -101,69 +199,125 @@
             }
         }
     </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4103172499595304"
-    crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header with Logo and Navigation -->
     <header>
         <div class="container">
             <div class="logo"><a href="index.html">Easy Count</a></div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html" class="active">Terms of Service</a>
+            </nav>
         </div>
     </header>
     
     <!-- Main Content -->
     <div class="container">
         <div class="content">
-            <h1>Terms of Use</h1>
+            <h1>Terms of Service</h1>
             
-            <p>Last updated: April 5, 2025</p>
+            <p class="last-updated">Last updated: May 3, 2023</p>
             
-            <p>Please read these Terms of Use ("Terms", "Terms of Use") carefully before using the easycount.app website (the "Service") operated by Easy Count ("us", "we", or "our").</p>
+            <p>Please read these Terms of Service ("Terms") carefully before using the easycount.app website (the "Service") operated by Easy Count ("us", "we", or "our").</p>
             
-            <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
+            <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users, and others who access or use the Service.</p>
             
-            <p>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.</p>
+            <p>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms, then you may not access the Service.</p>
             
-            <h2>Use of Service</h2>
+            <h2>1. Use of Service</h2>
             
             <p>Easy Count provides a web-based timer application that allows users to set and track time for various purposes. The Service is provided "as is" and "as available" without any warranties, either express or implied.</p>
             
-            <h2>Content</h2>
+            <p>We reserve the right to modify, suspend, or discontinue the Service (or any part or content thereof) at any time with or without notice, and we will not be liable to you or to any third party for any such modification, suspension, or discontinuance.</p>
             
-            <p>Our Service allows you to use timer functionality. You are responsible for your use of the Service and any consequences thereof.</p>
+            <h2>2. Content</h2>
             
-            <h2>Intellectual Property</h2>
+            <p>Our Service allows you to use timer functionality and related features. You are responsible for your use of the Service and any consequences thereof.</p>
             
-            <p>The Service and its original content, features, and functionality are and will remain the exclusive property of Easy Count and its licensors. The Service is protected by copyright, trademark, and other laws of both the United States and foreign countries. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of Easy Count.</p>
+            <p>By using our Service, you agree that:</p>
+            <ul>
+                <li>You will not use the Service for any illegal purposes</li>
+                <li>You will not attempt to probe, scan, or test the vulnerability of the Service or circumvent any security measures</li>
+                <li>You will not use automated means to access or use the Service without our express permission</li>
+                <li>You will not interfere with or disrupt the integrity or performance of the Service</li>
+            </ul>
             
-            <h2>Links To Other Web Sites</h2>
+            <!-- Ad placement with clear separation from content -->
+            <div class="ad-container">
+                <div class="ad-banner">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-4103172499595304"
+                         data-ad-slot="9876543210"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
             
-            <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by Easy Count.</p>
+            <h2>3. Intellectual Property</h2>
             
-            <p>Easy Count has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that Easy Count shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.</p>
+            <p>The Service and its original content, features, and functionality are and will remain the exclusive property of Easy Count and its licensors. The Service is protected by copyright, trademark, and other laws of both the United States and foreign countries.</p>
             
-            <h2>Termination</h2>
+            <p>Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of Easy Count.</p>
+            
+            <h2>4. Data Storage</h2>
+            
+            <p>Easy Count primarily stores timer data locally in your browser using technologies like localStorage. This means:</p>
+            <ul>
+                <li>Your timer settings and preferences are stored on your device</li>
+                <li>We do not require user accounts or store personal information on our servers</li>
+                <li>If you clear your browser data or use a different device, your saved timer configurations may not be available</li>
+            </ul>
+            
+            <h2>5. Links To Other Websites</h2>
+            
+            <p>Our Service may contain links to third-party websites or services that are not owned or controlled by Easy Count.</p>
+            
+            <p>Easy Count has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third-party websites or services. You further acknowledge and agree that Easy Count shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods, or services available on or through any such websites or services.</p>
+            
+            <h2>6. Termination</h2>
             
             <p>We may terminate or suspend access to our Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
             
-            <h2>Limitation Of Liability</h2>
+            <h2>7. Limitation Of Liability</h2>
             
-            <p>In no event shall Easy Count, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from (i) your access to or use of or inability to access or use the Service; (ii) any conduct or content of any third party on the Service; (iii) any content obtained from the Service; and (iv) unauthorized access, use or alteration of your transmissions or content, whether based on warranty, contract, tort (including negligence) or any other legal theory, whether or not we have been informed of the possibility of such damage.</p>
+            <p>In no event shall Easy Count, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+            <ul>
+                <li>Your access to or use of or inability to access or use the Service</li>
+                <li>Any conduct or content of any third party on the Service</li>
+                <li>Any content obtained from the Service</li>
+                <li>Unauthorized access, use, or alteration of your transmissions or content</li>
+            </ul>
+            <p>Whether based on warranty, contract, tort (including negligence), or any other legal theory, whether or not we have been informed of the possibility of such damage.</p>
             
-            <h2>Advertising</h2>
+            <h2>8. Advertising</h2>
             
-            <p>The Service may display advertisements provided by third parties, including Google AdSense. These advertisements may be targeted based on the content of the Service, queries made through the Service, or other information. We do not control the content of these advertisements and are not responsible for their content.</p>
+            <p>The Service may display advertisements provided by third parties, including Google AdSense. These advertisements may be targeted based on the content of the Service, queries made through the Service, or other information.</p>
             
-            <h2>Governing Law</h2>
+            <p>We aim to ensure that advertisements displayed on our Service are appropriate and not disruptive to your user experience. However, we do not control the content of these advertisements and are not responsible for their content.</p>
+            
+            <p>For more information about how Google uses data when you use our site, please visit Google's privacy policy at <a href="https://policies.google.com/technologies/partner-sites" target="_blank">https://policies.google.com/technologies/partner-sites</a>.</p>
+            
+            <h2>9. Governing Law</h2>
             
             <p>These Terms shall be governed and construed in accordance with the laws of the United States, without regard to its conflict of law provisions.</p>
             
-            <h2>Changes</h2>
+            <p>Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect.</p>
             
-            <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+            <h2>10. Changes</h2>
             
-            <h2>Contact Us</h2>
+            <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+            
+            <p>By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the Service.</p>
+            
+            <h2>11. Contact Us</h2>
             
             <p>If you have any questions about these Terms, please contact us at <a href="mailto:contact@easycount.app">contact@easycount.app</a>.</p>
         </div>
@@ -173,10 +327,11 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="copyright">© 2025 Easy Count. All rights reserved.</div>
+                <div>&copy; 2023 Easy Count. All rights reserved.</div>
                 <div class="footer-links">
-                    <a href="privacy-policy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Use</a>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="privacy.html">Privacy Policy</a>
                     <a href="contact.html">Contact</a>
                 </div>
             </div>
